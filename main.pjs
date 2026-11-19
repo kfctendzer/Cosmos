@@ -1,0 +1,11 @@
+// ─── COSMOS & MATH EXPLORER ──────────────────────────────────────────
+// Interactive visual study guide: dimensions, topology, trig, algebra,
+// chaos, solar system, black holes, particle physics.
+
+$meta
+  title = Cosmos & Math Explorer
+  description = Interactive visual study guide: higher dimensions, topology, trigonometry, abstract algebra, chaos and determinism, solar system astronomy, black holes, and particle physics — live 3D, real math, worked examples.
+  tags = math, physics, astronomy, interactive, education, visualization, black holes, algebra, topology
+
+hello
+  world

@@ -1,0 +1,17 @@
+COSMOS & MATH EXPLORER — self-hosting guide
+=============================================
+This zip is a complete static website. No build step, no server needed.
+
+To host it anywhere (Netlify, Vercel, GitHub Pages, itch.io, any web host):
+  1. Unzip this file, keeping the folder structure.
+  2. Upload index.html + the src/ folder (and HOSTING.txt if you like) to your host.
+  3. Done. Open index.html's URL in a browser.
+
+Notes:
+  - main.pjs is only used by Perchance (site metadata). It is harmless on
+    other hosts and can be deleted if you want.
+  - Everything runs offline in the browser: all physics and 3D-style
+    visuals are dependency-free 2D canvas JavaScript (src/*.js + src/*.css).
+  - No API keys, no backend, no tracking.
+  - To edit content: data lives in src/content.js (planets, particles,
+    study guide) and src/elements.js (the 118 elements).

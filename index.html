@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="src/styles.css">
+<canvas id="stars"></canvas>
+<header class="hero">
+<div class="kicker">interactive study guide <span class="livedot"></span> live</div>
+<h1 class="title">Cosmos &amp; Math Explorer</h1>
+<p class="subtitle">Higher dimensions you can rotate, topology you can bend, trig you can drag, algebra you can multiply, chaos you can tune — plus a live solar system, a black hole, and the particle zoo. Real math, worked examples, zero prerequisites beyond curiosity.</p>
+</header>
+<nav class="tabs">
+<button class="on" data-tab="dims">4D Dimensions</button>
+<button data-tab="topo">Topology</button>
+<button data-tab="trig">Trigonometry</button>
+<button data-tab="alg">Algebra</button>
+<button data-tab="chaos">Chaos</button>
+<button data-tab="solar">Solar System</button>
+<button data-tab="bh">Black Holes</button>
+<button data-tab="ns">Neutron Stars</button>
+<button data-tab="elem">Elements</button>
+<button data-tab="aero">Aerodynamics</button>
+<button data-tab="part">Particles</button>
+<button data-tab="guide">Study Guide</button>
+</nav>
+<main>
+<section class="panel on" id="tab-dims">
+<h2><span class="n">01</span>Seeing the fourth dimension</h2>
+<p class="lede">We can't picture higher dimensions directly, so we project them — the way a 3D cube casts a 2D shadow. Pick a dimension from 2 to 6, drag the sliders to spin in planes no 3D object can access, or click the shape itself to pause.</p>
+<div class="planets" id="dimBtns" style="margin-bottom:10px"><button data-dim="2">2D square</button><button data-dim="3">3D cube</button><button class="on" data-dim="4">4D tesseract</button><button data-dim="5">5D 5-cube</button><button data-dim="6">6D 6-cube</button></div>
+<div class="viz"><canvas id="tesCv"></canvas><div class="vizbar">
+<label>XW <input type="range" id="tesXW" min="0" max="6.28" step="0.01" value="0.6"></label>
+<label>YW <input type="range" id="tesYW" min="0" max="6.28" step="0.01" value="0.3"></label>
+<label>ZW <input type="range" id="tesZW" min="0" max="6.28" step="0.01" value="0.0"></label>
+<label>VW <input type="range" id="tesVW" min="0" max="6.28" step="0.01" value="0.9"></label>
+<button class="ghost on" id="tesSpin">auto-spin</button>
+</div></div>
+<div class="grid g2">
+<div class="card reveal"><h3>The math <span class="tag">projection</span></h3>
+<div class="formula">rotate in XW: x′ = x·cosθ − w·sinθ, w′ = x·sinθ + w·cosθ<br>project: f = d / (d − w), then (x·f, y·f, z·f)</div>
+<p>A 4D rotation picks <b>two axes</b> at a time — there are 6 such planes (XY, XZ, XW, YZ, YW, ZW). The sliders above rotate in the three planes that involve W, the axis you can't point to.</p>
+<dl class="kv"><dt>counts</dt><dd id="tesStats">16 vertices · 32 edges · 24 faces · 8 cubes</dd><dt>analogy</dt><dd>square → cube → tesseract</dd></dl></div>
+<div class="card reveal"><h3>Worked example <span class="tag">counts</span></h3>
+<div class="ex"><b>Vertices:</b> each of 4 coordinates is ±1 → 2⁴ = <b>16</b>.</div>
+<div class="ex"><b>Edges:</b> from each vertex, 4 directions to flip one sign → 16·4/2 = <b>32</b>.</div>
+<div class="ex"><b>Go higher:</b> a 5-cube has 2⁵ = <b>32</b> vertices and 5·32/2 = <b>80</b> edges; a 6-cube has <b>64</b> vertices, <b>192</b> edges. Rule: N = 2ⁿ vertices, E = n·2ⁿ⁻¹ edges.</div>
+<div class="ex"><b>Hypersphere:</b> x² + y² + z² + w² = r². Slice at fixed w and you see an ordinary 3D sphere grow then shrink — a 4D ball passing through our space.</div></div>
+</div>
+</section>
+<section class="panel" id="tab-topo">
+<h2><span class="n">02</span>Topology: shape without measuring</h2>
+<p class="lede">Topology asks what survives stretching and bending: holes, twists, one-sidedness. Spin the surfaces and compare their invariants.</p>
+<div class="viz"><canvas id="topoCv"></canvas><div class="vizbar">
+<span class="planets"><button class="on" data-shape="torus">torus</button><button data-shape="mobius">möbius</button><button data-shape="klein">klein</button></span>
+<label>R <input type="range" id="topoR" min="0.8" max="2.4" step="0.05" value="1.6"><output id="topoRO">1.60</output></label>
+<label>r <input type="range" id="topoR2" min="0.25" max="1" step="0.05" value="0.6"><output id="topoR2O">0.60</output></label>
+<button class="ghost on" id="topoWire">wire</button>
+<span class="muted">drag the shape to rotate it</span>
+</div></div>
+<div class="grid g2">
+<div class="card reveal"><h3>Invariants</h3>
+<dl class="kv"><dt>euler χ</dt><dd id="topoChi">χ = 0</dd><dt>sidedness</dt><dd id="topoOrient">orientable: yes (two-sided)</dd></dl>
+<div class="formula">torus: ((R + r·cos v)·cos u, (R + r·cos v)·sin u, r·sin v)<br>χ = V − E + F → sphere 2, torus 0</div>
+<p>An ant walking a Möbius strip returns mirrored — one side only. A coffee cup and a donut are the <b>same</b> topologically (one hole, χ = 0).</p></div>
+<div class="card reveal"><h3>Worked example</h3>
+<div class="ex"><b>χ of a torus:</b> wrap a 4×4 grid into a tube, then join the ends: V=16, E=32, F=16 → χ = 16−32+16 = <b>0</b>.</div>
+<div class="ex"><b>Cut test:</b> cut a torus loop → cylinder. Cut a Möbius loop down the middle → <b>one longer loop</b>, still joined.</div></div>
+</div>
+</section>
+<section class="panel" id="tab-trig">
+<h2><span class="n">03</span>Trigonometry on the unit circle</h2>
+<p class="lede">Sine and cosine are just the coordinates of a point riding the unit circle. Drag the dot — the graphs, identities, and triangle ratios all fall out.</p>
+<div class="viz short"><canvas id="trigCv"></canvas><div class="vizbar">
+<label>angle <input type="range" id="trigAng" min="0" max="6.283" step="0.01" value="0.7"><output id="trigAngO">40.1°</output></label>
+<span>sin <output id="trigSin">0.64</output></span><span>cos <output id="trigCos">0.76</output></span><span>tan <output id="trigTan">0.84</output></span>
+</div></div>
+<div class="grid g2">
+<div class="card reveal"><h3>The math</h3>
+<div class="formula">point: (cos θ, sin θ) · sin²θ + cos²θ = 1<br>law of sines: a/sin A = b/sin B = c/sin C = 2R<br>law of cosines: c² = a² + b² − 2ab·cos C</div>
+<p>Tangent is the slope of the radius. When the radius points straight up, cosine hits zero and tangent is <b>undefined</b> — the vertical asymptote you see in y = tan x.</p></div>
+<div class="card reveal"><h3>Worked example</h3>
+<div class="ex"><b>Height of a tree:</b> stand 20 m back, sight the top at 35°. Height = 20·tan 35° ≈ 20 × 0.700 = <b>14.0 m</b>.</div>
+<div class="ex"><b>Check the identity:</b> θ = 40° → sin² + cos² ≈ 0.413 + 0.587 = <b>1.000</b> — it always closes because x² + y² = 1.</div></div>
+</div>
+</section>
+<section class="panel" id="tab-alg">
+<h2><span class="n">04</span>Abstract algebra: symmetry arithmetic</h2>
+<p class="lede">Groups are the grammar of symmetry. Add clock-hours in Zₙ, then graduate to the triangle group D₃ — where order of operations matters.</p>
+<div class="grid g2">
+<div class="card reveal"><h3>Cyclic group Z<sub>n</sub></h3>
+<label class="muted">n = <input type="number" id="znN" value="6" min="2" max="12" style="width:60px"></label>
+<div id="znTable"></div>
+<div class="ex" id="znGen"></div>
+<div class="formula">group axioms: closure · associativity · identity e · inverses<br>Lagrange: |H| divides |G|</div></div>
+<div class="card reveal"><h3>Triangle group D₃ (6 symmetries)</h3>
+<div class="viz short"><canvas id="d3Cv"></canvas><div class="vizbar">
+<button class="ghost" id="d3r">rotate r</button>
+<button class="ghost" id="d3f">flip s</button>
+<button class="ghost" id="d3Reset">reset</button>
+</div></div>
+<div class="ex" id="d3Word">word: <b>e</b> = <b>e</b></div>
+<div id="d3Table"></div>
+<p class="muted">Try r·r·r = e, s·s = e, but r·s ≠ s·r — non-abelian. Trace the letters A, B, C on the triangle to prove it.</p></div>
+</div>
+</section>
+<section class="panel" id="tab-chaos">
+<h2><span class="n">05</span>Determinism that still surprises</h2>
+<p class="lede">The Lorenz system is fully deterministic — no randomness anywhere — yet nearby starts diverge exponentially. Tune ρ across the boundary from order into chaos.</p>
+<div class="viz short"><canvas id="lorCv"></canvas><div class="vizbar">
+<label>σ <input type="range" id="lorSigma" min="1" max="20" step="0.1" value="10"><output id="lorSigmaO">10.0</output></label>
+<label>ρ <input type="range" id="lorRho" min="1" max="120" step="0.5" value="28"><output id="lorRhoO">28.0</output></label>
+<label>β <input type="range" id="lorBeta" min="1" max="5" step="0.05" value="2.67"><output id="lorBetaO">2.67</output></label>
+<button class="ghost" id="lorReset">reset</button>
+<span class="muted" id="lorRegime"></span>
+</div></div>
+<div class="grid g2">
+<div class="card reveal"><h3>The equations</h3>
+<div class="formula">dx/dt = σ(y−x) · dy/dt = x(ρ−z)−y · dz/dt = xy−βz<br>classic: σ=10, β=8/3, ρ=28 → strange attractor</div>
+<p>At ρ &lt; 24.7 trajectories spiral into fixed points. Above it, the fixed points go unstable and the butterfly emerges. Laplace's demon — perfect prediction from perfect data — dies on the second decimal place.</p></div>
+<div class="card reveal"><h3>Logistic map: chaos in one line</h3>
+<div class="viz short"><canvas id="bifurCv"></canvas><div class="vizbar">
+<label>r <input type="range" id="logR" min="2.5" max="4" step="0.005" value="3.7"><output id="logRO">3.700</output></label>
+<label>x₀ <input type="range" id="logX0" min="0.05" max="0.95" step="0.05" value="0.5"><output id="logX0O">0.50</output></label>
+</div></div>
+<div class="viz short"><canvas id="orbitCv"></canvas><div class="vizbar"><span class="muted" id="logRegime"></span></div></div>
+<div class="ex"><b>Try it:</b> r = 3.2 → 2-cycle. r = 3.5 → 4-cycle. r = 3.9 → chaos. Rule: xₙ₊₁ = r·xₙ(1−xₙ).</div></div>
+</div>
+</section>
+<section class="panel" id="tab-solar">
+<h2><span class="n">06</span>Solar system: our Earth in context</h2>
+<p class="lede">Eight planets, one star, 4.6 billion years. Orbits to scale (compressed), speeds true to Kepler — click any planet or button for its file.</p>
+<div class="viz"><canvas id="solarCv"></canvas><div class="vizbar">
+<label>speed <input type="range" id="solSpeed" min="0" max="5" step="0.1" value="1"><output id="solSpeedO">1.0×</output></label>
+<button class="ghost" id="solPause">pause</button>
+<button class="ghost on" id="solLabels">labels</button>
+</div></div>
+<div class="planets" id="planetBtns"></div>
+<div class="card reveal" id="planetInfo"></div>
+<div class="grid g2">
+<div class="card reveal"><h3>Kepler calculator</h3>
+<p>Third law: <b>T² = a³</b> (T in years, a in AU). Any semi-major axis → its period.</p>
+<label class="muted">a (AU) <input type="number" id="kepA" value="1.524" step="0.001" style="width:90px"></label>
+<button class="btn" id="kepGo">compute period</button>
+<div class="ex" id="kepOut">T = √a³ = 1.881 yr (687 days)</div></div>
+<div class="card reveal"><h3>Worked example: Mars</h3>
+<div class="ex"><b>a = 1.524 AU</b> → T = √(1.524³) = √3.540 ≈ <b>1.881 yr</b> — matches the table above and the viz speed.</div>
+<div class="ex"><b>Retrograde:</b> Mars sometimes loops backwards — not real motion, just Earth lapping it on the inside track.</div></div>
+</div>
+</section>
+<section class="panel" id="tab-bh">
+<h2><span class="n">07</span>Black holes bend the stage itself</h2>
+<p class="lede">Mass tells spacetime how to curve. Raise the mass and watch the grid funnel deepen, the shadow grow, and the probe's clock slow.</p>
+<div class="viz"><canvas id="bhCv"></canvas><div class="vizbar">
+<label>mass <input type="range" id="bhMass" min="1" max="20" step="1" value="8"><output id="bhMassO">8 M☉</output></label>
+<label>probe at <input type="range" id="bhProbe" min="1.2" max="12" step="0.1" value="6"><output id="bhProbeO">6.0 rs</output></label>
+</div></div>
+<div class="grid g3">
+<div class="card reveal"><h3>Shadow radius</h3><dl class="kv"><dt>r_s = 2GM/c²</dt><dd id="bhRs">23.6 km</dd></dl><p class="muted">For stellar holes, r_s ≈ 2.95 km per solar mass.</p></div>
+<div class="card reveal"><h3>Probe clock</h3><dl class="kv"><dt>time dilation</dt><dd id="bhDil">×0.913</dd></dl><p class="muted">dτ = dt·√(1 − r_s/r). At the horizon the factor hits zero — time stops, from far away.</p></div>
+<div class="card reveal"><h3>Escape speed</h3><dl class="kv"><dt>v_esc</dt><dd id="bhEsc">172,754 km/s</dd></dl><p class="muted">v = c·√(2/r) in r_s units. At 1 r_s it reaches c: nothing returns.</p></div>
+</div>
+<div class="card reveal"><h3>Worked example: 10 solar masses</h3>
+<div class="formula">r_s = 2GM/c² = 2 × 6.674e−11 × 1.989e31 / (2.998e8)² ≈ <b>29.5 km</b><br>photon sphere = 1.5 r_s ≈ <b>44 km</b> — light itself orbits there</div>
+<p>Tidal force across a 2 m astronaut at 100 km: Δg ∝ M/r³ — stretched ("spaghettified") long before crossing. The dashed ring in the viz is the photon sphere; the glowing disk is infalling gas heated to X-ray brightness.</p></div>
+</section>
+<section class="panel" id="tab-ns">
+<h2><span class="n">08</span>Neutron stars: a city that weighs a billion tons per teaspoon</h2>
+<p class="lede">When a massive star dies but is too light to become a black hole, its core collapses into neutrons — spinning up to 716 times per second and sweeping lighthouse beams across the sky. Click the star to trigger a starquake glitch.</p>
+<div class="viz"><canvas id="nsCv"></canvas><div class="vizbar">
+<label>mass <input type="range" id="nsMass" min="1.1" max="2.2" step="0.05" value="1.4"><output id="nsMassO">1.40 M☉</output></label>
+<label>spin <input type="range" id="nsSpin" min="0" max="716" step="1" value="30"><output id="nsSpinO">30 Hz (1800 rpm)</output></label>
+<button class="ghost on" id="nsBeams">beams</button>
+<button class="ghost" id="nsGlitch">starquake!</button>
+</div></div>
+<div class="grid g3">
+<div class="card reveal"><h3>Radius</h3><dl class="kv"><dt>size</dt><dd id="nsRadius">≈ 12.4 km (a city)</dd></dl><p class="muted">More mass → smaller star. Past ~2.2 M☉ nothing stops the collapse: black hole.</p></div>
+<div class="card reveal"><h3>Compactness</h3><dl class="kv"><dt>2GM/Rc²</dt><dd id="nsCompact">≈ 0.34 (BH = 1.0)</dd></dl><p class="muted" id="nsGlitchO">stable rotator</p></div>
+<div class="card reveal"><h3>Escape speed</h3><dl class="kv"><dt>v_esc</dt><dd id="nsEsc">≈ 150,000 km/s</dd></dl><p class="muted">About half the speed of light — compare the probe readout in Black Holes.</p></div>
+</div>
+<div class="grid g2">
+<div class="card reveal"><h3>Pulsar light curve</h3>
+<div class="viz short"><canvas id="nsLightCv"></canvas></div>
+<p class="muted">Each spike is one sweep of the beam across our line of sight — the "pulse" in pulsar. Spin the slider to 716 Hz: the fastest known rotator, J1748−2446ad.</p></div>
+<div class="card reveal"><h3>Worked example: teaspoon mass</h3>
+<div class="formula">ρ ≈ M / (4/3 πR³) ≈ 2.8e30 kg / 7e12 m³ ≈ <b>4 × 10¹⁷ kg/m³</b><br>one teaspoon (5 ml) ≈ <b>2 billion tons</b></div>
+<div class="ex"><b>Why it spins so fast:</b> angular momentum L = Iω is conserved while R shrinks 10⁵× — like an ice skater pulling in, squared. A lazy 25-day solar spin becomes milliseconds.</div>
+<div class="ex"><b>Black hole vs neutron star:</b> both start as collapsing cores. The dividing line (Tolman–Oppenheimer–Volkoff limit) sits near <b>2.2 M☉</b> — below it neutrons hold, above it nothing does.</div></div>
+</div>
+</section>
+<section class="panel" id="tab-elem">
+<h2><span class="n">09</span>Every element in the universe</h2>
+<p class="lede">All 118 known elements — every substance on Earth is built from these. Search, filter by family or state of matter, and click any tile for its story.</p>
+<div class="vizbar" style="border-radius:14px; border:1px solid var(--line); margin-bottom:12px">
+<label>search <input type="text" id="elSearch" placeholder="Fe, gold, 26…" style="width:130px; background:rgba(4,8,18,.7); border:1px solid var(--line); border-radius:8px; color:var(--txt); padding:6px 10px; font-family:var(--font)"></label>
+<label>family <select id="elCat" style="background:rgba(4,8,18,.7); color:var(--txt); border:1px solid var(--line); border-radius:8px; padding:6px"><option value="">all families</option></select></label>
+<span><button class="ghost" data-st="g">gases</button> <button class="ghost" data-st="l">liquids</button> <button class="ghost" data-st="s">solids</button></span>
+</div>
+<div id="elGrid"></div>
+<div class="card reveal" id="elDetail" style="margin-top:12px"></div>
+<p class="muted" id="elCount" style="margin-top:8px"></p>
+<div class="card reveal"><h3>Worked example: reading tungsten</h3>
+<div class="ex"><b>W, #74, 183.84 u, transition metal, solid.</b> Highest melting point of all elements (3422 °C) — light-bulb filaments, armor penetrators, rocket nozzles. Its position (period 6, group 6) predicts a hard refractory metal before you read a word.</div></div>
+</section>
+<section class="panel" id="tab-aero">
+<h2><span class="n">10</span>Aerodynamics wind tunnel</h2>
+<p class="lede">A live wind tunnel: air particles stream over a wing you design. Drag the wing up/down to change angle of attack, push it past 15° to stall, and watch lift collapse on the polar plot.</p>
+<div class="planets" style="margin-bottom:10px"><button data-preset="paper">paper plane</button><button data-preset="cessna">cessna 172</button><button data-preset="airliner">airliner</button><button data-preset="fighter">fighter jet</button></div>
+<div class="viz"><canvas id="aeroCv"></canvas><div class="vizbar">
+<label>angle <input type="range" id="aeroAlpha" min="-10" max="20" step="0.5" value="3"><output id="aeroAlphaO">3.0°</output></label>
+<label>speed <input type="range" id="aeroSpeed" min="2" max="300" step="1" value="28"><output id="aeroSpeedO">28 m/s</output></label>
+<label>camber <input type="range" id="aeroCamber" min="0" max="9" step="0.5" value="2"><output id="aeroCamberO"></output></label>
+<label>thickness <input type="range" id="aeroThick" min="5" max="18" step="0.5" value="12"><output id="aeroThickO"></output></label>
+</div></div>
+<div class="grid g3">
+<div class="card reveal"><h3>Lift coefficient</h3><dl class="kv"><dt>Cl ≈ 2π(α−α₀)</dt><dd id="aeroCl">0.33</dd></dl></div>
+<div class="card reveal"><h3>Drag / L:D</h3><dl class="kv"><dt>Cd</dt><dd id="aeroCd">0.016</dd><dt>glide</dt><dd id="aeroLD">20 : 1</dd></dl></div>
+<div class="card reveal"><h3>Lift force</h3><dl class="kv"><dt>16 m² wing</dt><dd id="aeroLift">— N</dd></dl><p class="muted" id="aeroWarn">smooth attached flow</p></div>
+</div>
+<div class="card reveal"><h3>Lift curve (polar)</h3>
+<div class="viz short"><canvas id="aeroPolar"></canvas></div>
+<div class="ex"><b>Try it:</b> raise the angle slowly — lift climbs linearly, then the wing reddens and Cl falls off a cliff. That cliff kills pilots who pull up in a stall. Push camber to 9%: even at α = 0° you now lift (α₀ went negative).</div></div>
+</section>
+<section class="panel" id="tab-part">
+<h2><span class="n">11</span>The particle zoo</h2>
+<p class="lede">Everything is built from 6 quarks, 6 leptons, and the bosons that boss them around. Filter by family, then tap any card for its story.</p>
+<div class="planets" style="margin-bottom:10px"><button class="on" data-fam="all">all 17</button><button data-fam="q">quarks</button><button data-fam="l">leptons</button><button data-fam="b">bosons</button></div>
+<div class="pgrid" id="pGrid"></div>
+<div class="card reveal" id="pInfo"></div>
+<div class="grid g2">
+<div class="card reveal"><h3>Worked example: build a proton</h3>
+<div class="ex"><b>u (+2/3) + u (+2/3) + d (−1/3) = +1.</b> Two ups and a down, glued by gluons — that charge arithmetic is why atoms exist.</div>
+<div class="ex"><b>Beta decay:</b> d → u + W⁻ turns a neutron into a proton — the weak force transmuting elements inside stars.</div></div>
+<div class="card reveal"><h3>Reading the table</h3>
+<p>Top border color = family: <b style="color:var(--acc)">blue quarks</b>, <b style="color:var(--acc2)">purple leptons</b>, <b style="color:var(--gold)">gold bosons</b>. Spin-½ particles are matter; integer-spin particles are force carriers — except the Higgs (spin 0), which is a field excitation giving others mass.</p></div>
+</div>
+</section>
+<section class="panel" id="tab-guide">
+<h2><span class="n">12</span>Study guide</h2>
+<p class="lede">Every section distilled to checklists. If you can do each bullet without notes, you own the topic.</p>
+<div id="guideList"></div>
+</section>
+</main>
+<footer>Cosmos &amp; Math Explorer — drag, scroll, and play in every section. Built for the curious.</footer>
+<script src="src/content.js"></script>
+<script src="src/three-viz.js"></script>
+<script src="src/widgets.js"></script>
+<script src="src/elements.js"></script>
+<script src="src/periodic.js"></script>
+<script src="src/aero.js"></script>
+<script src="src/neutron.js"></script>
+<script src="src/app.js"></script>
